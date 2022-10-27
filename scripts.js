@@ -16,3 +16,9 @@ function getVideo(){
   });
 }
  getVideo();
+
+ function paintToCanvas(){
+   const {videoWidth: width, videoHeight: height } = video;
+   canvas.width = width;
+   canvas.height = height;
+ }
