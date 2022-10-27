@@ -21,4 +21,8 @@ function getVideo(){
    const {videoWidth: width, videoHeight: height } = video;
    canvas.width = width;
    canvas.height = height;
+
+   return setInterval(() => { // if you ever need to stop this from painting, you can have access to that interval and can call "clearInterval" on it!
+     ctx.drawImage(video, 0 , 0 , width , height);
+   }, 16);
  }
