@@ -31,6 +31,15 @@ function takePhoto(){
   // to play sound
   snap.currentTime = 0;
   snap.play();
+
+  // to take the data out of the canvas;
+  const data = canvas.toDataURL("image/jpeg"); // Base64: text-based representation of the picture we take.
+  const link = document.createElement("a");
+  link.href = data;
+  link.setAttribute("download", "profile");
+  link.innerHTML = `<img src = ${data} alt = "profile photo" />`;
+  strip.insertBefore(link, strip.firstChild); //we're going to dump our links in strip
+
 }
 
 video.addEventListener("canplay", paintToCanvas); // that is an event that video will emit. Once this video is playing, it's going to emit an event called
