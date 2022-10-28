@@ -26,3 +26,12 @@ function getVideo(){
      ctx.drawImage(video, 0 , 0 , width , height);
    }, 16);
  }
+
+function takePhoto(){
+  // to play sound
+  snap.currentTime = 0;
+  snap.play();
+}
+
+video.addEventListener("canplay", paintToCanvas); // that is an event that video will emit. Once this video is playing, it's going to emit an event called
+// "canplay", which in turn canvas is going to say "now we should start to paint to the canvas "!
