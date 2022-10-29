@@ -29,7 +29,10 @@ function getVideo(){
      let pixels = ctx.getImageData(0, 0, width, height);
 
      // change pixels rgb values
-     pixels = redEffect(pixels);
+     //pixels = redEffect(pixels);
+     pixels = rgbSplit(pixels);
+
+     ctx.globalAlpha = 0.1 ; //transparency value of the image
 
      // put the new rgb values back;
      ctx.putImageData(pixels, 0, 0);
@@ -61,5 +64,14 @@ function redEffect(pixels){
   return pixels;
 }
 
+function rgbSplit(pixels){
+  for(let i = 0; i < pixels.data.length; i += 4) {
+          pixels.data[i - 150] = pixels.data[i + 0]; // red
+          pixels.data[i + 100] = pixels.data[i + 1]; // green
+          pixels.data[i - 150] = pixels.data[i + 2]; // blue
+      }
+
+    return pixels;
+  }
 video.addEventListener("canplay", paintToCanvas); // that is an event that video will emit. Once this video is playing, it's going to emit an event called
 // "canplay", which in turn canvas is going to say "now we should start to paint to the canvas "!
