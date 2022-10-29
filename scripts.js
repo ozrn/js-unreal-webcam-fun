@@ -24,6 +24,15 @@ function getVideo(){
 
    return setInterval(() => { // if you ever need to stop this from painting, you can have access to that interval and can call "clearInterval" on it!
      ctx.drawImage(video, 0 , 0 , width , height);
+
+     // take pixels out of the canvas;
+     let pixels = ctx.getImageData(0, 0, width, height);
+
+     // change pixels rgb values
+     pixels = redEffect(pixels);
+
+     // put the new rgb values back;
+     ctx.putImageData(pixels, 0, 0);
    }, 16);
  }
 
@@ -40,6 +49,16 @@ function takePhoto(){
   link.innerHTML = `<img src = ${data} alt = "profile photo" />`;
   strip.insertBefore(link, strip.firstChild); //we're going to dump our links in strip
 
+}
+
+function redEffect(pixels){
+  for(let i = 0; i < pixels.data.length; i+=4){
+       pixels.data[i + 0] = pixels.data[i + 0] + 100; // red
+       pixels.data[i + 1] = pixels.data[i + 1] - 50;  // green
+       pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // blue
+  };
+
+  return pixels;
 }
 
 video.addEventListener("canplay", paintToCanvas); // that is an event that video will emit. Once this video is playing, it's going to emit an event called
